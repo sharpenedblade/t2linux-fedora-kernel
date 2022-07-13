@@ -31,6 +31,8 @@ mkdir /tmp/src && cd /tmp/src
 tar -xf /root/rpmbuild/SOURCES/linux-*.tar.xz
 cd *
 git init
+git config user.name build
+bit config user.email build@example.com
 git add * .*
 git commit -m "init"
 git clone --depth=1 https://github.com/t2linux/apple-bce-drv drivers/staging/apple-bce
