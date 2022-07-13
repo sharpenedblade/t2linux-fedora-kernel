@@ -26,6 +26,20 @@ rm -rf 0001-arch-additions.patch
 for f in *.patch; do mv "$f" "$f.t2"; done
 cp *.patch.t2 /root/rpmbuild/SOURCES/
 
+# Get apple modules
+mkdir /tmp/src && cd /tmp/src
+tar -xf /root/rpmbuild/SOURCES/linux-*.tar.xz
+cd *
+git init
+git add * .*
+git commit -m "init"
+git clone --depth=1 https://github.com/t2linux/apple-bce-drv drivers/staging/apple-bce
+git clone --depth=1 https://github.com/t2linux/apple-ib-drv drivers/staging/apple-ibridge
+rm -rf drivers/staging/*/.git
+git add drivers/staging
+git commit -m "Add apple-bce and apple-ib"
+git format-patch -n1 --output /root/rpmbuild/SOURCES/apple-bce-and-ib.patch.t2
+
 # Apply patches
 cd /root/rpmbuild/SPECS
 echo "CONFIG_APPLE_BCE=m" >> "/root/rpmbuild/SOURCES/kernel-local"
