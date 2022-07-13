@@ -33,7 +33,7 @@ cd *
 git init
 git config user.name build
 git config user.email build@example.com
-git add * .*
+git add --all
 git commit -m "init"
 git clone --depth=1 https://github.com/t2linux/apple-bce-drv drivers/staging/apple-bce
 git clone --depth=1 https://github.com/t2linux/apple-ib-drv drivers/staging/apple-ibridge
